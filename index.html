@@ -1,170 +1,152 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NextEra Digital</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
- <!------------------------CSS----------------------------------->
-<style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="NextEra Digital — تصميم وتطوير واجهات رقمية مستقبلية مع حلول ذكاء اصطناعي.">
+  <title>NextEra Digital</title>
+  <link rel="icon" href="Medo.jpg" type="image/jpeg">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <!------------------------CSS----------------------------------->
+  <style>
   :root {
-    --bg-color: #020617;
-    --text-color: #eee;
-    --card-bg: rgba(255,255,255,0.05);
+    --bg-color: #071021; /* deep navy */
+    --surface: #0b1220;
+    --muted: #98a0b3;
+    --text-color: #e8eef8;
+    --card-bg: rgba(255,255,255,0.03);
     --accent1: #00ffd5;
     --accent2: #7c3aed;
+    --glass: rgba(255,255,255,0.03);
   }
   [data-theme="day"] {
-    --bg-color: #f5f5f5;
-    --text-color: #111;
-    --card-bg: rgba(255,255,255,0.15);
+    --bg-color: #f8fafc;
+    --surface: #ffffff;
+    --muted: #6b7280;
+    --text-color: #0b1220;
+    --card-bg: rgba(10,10,10,0.03);
     --accent1: #1e90ff;
     --accent2: #ff69b4;
+    --glass: rgba(255,255,255,0.6);
   }
 
+  html, body { height: 100%; }
   body {
     margin: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: var(--bg-color);
+    font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(180deg,var(--bg-color), #031021 60%);
     color: var(--text-color);
     overflow-x: hidden;
-    transition: background 0.5s, color 0.5s;
+    transition: background 0.45s ease, color 0.35s ease;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    line-height: 1.6;
   }
-  header, footer {
-    padding: 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+
+  html { scroll-behavior: smooth; }
+
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 1200;
+    backdrop-filter: blur(8px);
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.02));
+    border-bottom: 1px solid rgba(255,255,255,0.03);
   }
-  header nav a {
-    margin: 0 10px;
-    text-decoration: none;
-    color: var(--text-color);
-    transition: 0.3s;
-  }
+  header .inner { max-width:1200px; margin:auto; display:flex; align-items:center; justify-content:space-between; padding:18px; }
+  header h1 { margin:0; font-size:1.25rem; letter-spacing:0.4px; }
+  header nav a { margin: 0 10px; text-decoration: none; color: var(--muted); font-weight:600; font-size:0.95rem; }
   header nav a:hover { color: var(--accent1); }
 
   .hero {
-    padding: 50px 20px;
+    padding: 68px 20px;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 480px;
     gap: 40px;
     align-items: center;
+    max-width:1200px;
+    margin: 24px auto;
   }
-  .hero h2 { font-size: 2.5em; }
+  .hero h2 { font-size: clamp(1.6rem, 3.5vw, 2.6rem); margin:0 0 8px 0; font-weight:800; }
+  .hero p { color:var(--muted); margin:0 0 14px 0; }
 
   .button {
-    padding: 12px 24px;
-    border-radius: 8px;
+    padding: 12px 20px;
+    border-radius: 12px;
     border: none;
     cursor: pointer;
-    font-weight: bold;
-    transition: transform 0.2s;
+    font-weight: 700;
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+    box-shadow: 0 6px 18px rgba(2,6,23,0.45);
   }
-  .button:hover { transform: scale(1.05); }
+  .button:active { transform: translateY(1px); }
+
   .btn-main {
-    background: linear-gradient(to right, var(--accent1), var(--accent2));
-    color: #000;
+    background: linear-gradient(90deg,var(--accent1), var(--accent2));
+    color: #011;
+    border: none;
   }
+  .btn-main:hover { box-shadow: 0 10px 30px rgba(124,58,237,0.18); transform: translateY(-3px); }
+
   .btn-sec {
-    border: 1px solid #444;
     background: transparent;
     color: var(--text-color);
+    border: 1px solid rgba(255,255,255,0.06);
   }
 
-  .section {
-    padding: 60px 20px;
-    max-width: 1200px;
-    margin: auto;
-  }
-  .services, .pricing, .content {
-    display: grid;
-    gap: 20px;
-  }
+  .section { padding: 48px 20px; max-width:1200px; margin: 0 auto 18px; }
+  .services, .pricing, .content { display:grid; gap:18px; }
   .services { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+
   .card {
-    background: var(--card-bg);
-    padding: 20px;
-    border-radius: 16px;
-    transition: 0.3s;
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    padding: 22px;
+    border-radius: 14px;
+    transition: transform 0.28s cubic-bezier(.2,.8,.2,1), box-shadow 0.28s;
+    border: 1px solid rgba(255,255,255,0.03);
   }
-  .card:hover {
-    transform: translateY(-8px) scale(1.02);
-    box-shadow: 0 0 15px var(--accent1)80;
-  }
-  .pricing { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
-  .content { grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); }
+  .card:hover { transform: translateY(-10px); box-shadow: 0 20px 60px rgba(2,6,23,0.6); }
 
-  form.card {
-    background: rgba(255,255,255,0.07);
-    backdrop-filter: blur(12px);
-    border: 1px solid rgba(255,255,255,0.15);
-  }
-  form input, form textarea {
-    padding: 10px;
-    border: none;
-    border-radius: 8px;
-    background: rgba(255,255,255,0.1);
-    color: var(--text-color);
-    font-size: 14px;
-  }
-  form input:focus, form textarea:focus {
-    outline: 2px solid var(--accent1);
-    background: rgba(255,255,255,0.15);
-  }
+  .pricing { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+  .pricing .card { padding:24px; }
+  .pricing .card h4 { margin: 0 0 8px 0; }
+  .pricing .card p { font-size:1.6rem; margin:6px 0 12px 0; color:var(--accent1); font-weight:800; }
 
-  footer {
-    border-top: 1px solid rgba(255,255,255,0.1);
-    font-size: 14px;
-    color: #ccc;
-  }
+  form.card { background: var(--card-bg); backdrop-filter: blur(6px); border: 1px solid rgba(255,255,255,0.04); }
+  form input, form textarea { padding: 12px; border-radius: 10px; border: none; background: rgba(255,255,255,0.03); color:var(--text-color); }
+  form input::placeholder, form textarea::placeholder { color: rgba(255,255,255,0.45); }
+  input:focus, textarea:focus { box-shadow: 0 0 0 4px rgba(0,255,213,0.06); }
 
-  .stars {
-    background-image: radial-gradient(var(--accent1) 1px, transparent 1px);
-    background-size: 30px 30px;
-    position: fixed;
-    inset: 0;
-    opacity: 0.15;
-    z-index: -1;
-    transition: background 0.5s;
+  footer { border-top: 1px solid rgba(255,255,255,0.03); padding:20px 18px; color:var(--muted); }
+
+  .stars { position: fixed; inset:0; z-index:-1; background-image: radial-gradient(var(--accent1) 1px, transparent 1px); background-size: 40px 40px; opacity:0.06; }
+
+  .lang-theme-btns { position: fixed; top: 14px; left: 50%; transform: translateX(-50%); z-index:1300; display:flex; gap:8px; }
+  .lang-theme-btns button { padding:8px 14px; border-radius:10px; border:none; cursor:pointer; font-weight:700; background:linear-gradient(90deg,var(--accent1),var(--accent2)); color:#021; box-shadow:0 6px 20px rgba(2,6,23,0.35); }
+
+  .toast { position: fixed; right: 20px; bottom: 20px; background: rgba(3,6,14,0.85); color:#fff; padding:12px 16px; border-radius:10px; display:none; z-index:2000; }
+
+  a { color: var(--accent1); text-decoration: none; transition: color .2s; }
+  a:hover { color: var(--accent2); }
+
+  /* responsive tweaks */
+  @media (max-width: 980px) { .hero { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 720px) {
+    header nav { display:none; }
+    .hero { grid-template-columns: 1fr; padding:32px 18px; }
+    .hero .card { order:2; }
+    .lang-theme-btns { left: auto; right: 14px; transform:none; }
   }
 
-  .lang-theme-btns {
-    position: fixed;
-    top: 15px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 1000;
-    display: flex;
-    gap: 10px;
-  }
-  .lang-theme-btns button {
-    padding: 8px 18px;
-    border: none;
-    border-radius: 12px;
-    cursor: pointer;
-    font-weight: bold;
-    background: linear-gradient(to right, var(--accent1), var(--accent2));
-    color: #000;
-    transition: 0.3s, transform 0.2s;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-  }
-  .lang-theme-btns button:hover {
-    transform: scale(1.1);
-    background: linear-gradient(to right, var(--accent2), var(--accent1));
-    color: #fff;
-  }
-
-  a { color: var(--accent1); text-decoration: none; transition:0.3s;}
-  a:hover { text-decoration: underline; color: var(--accent2);}
-  
-  @media (max-width: 700px) {
-    .hero { grid-template-columns: 1fr; gap:20px; }
-  }
-</style>
+  /* accessibility */
+  a:focus, button:focus, input:focus, textarea:focus { outline: none; }
+  :focus-visible { outline: 3px solid rgba(0,255,213,0.16); outline-offset: 3px; }
+  </style>
   <!------------------------HTML----------------------------------->
 </head>
 <body>
+<a class="skip-link" href="#main" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;">Skip to content</a>
 <div class="stars"></div>
 
 <header>
@@ -183,13 +165,13 @@
 </header>
 
 <div class="lang-theme-btns">
-  <button id="themeBtn">🌙 ليل / ☀️ صبح</button>
-  <button id="langBtn">AR / EN</button>
+  <button id="themeBtn" aria-pressed="false" aria-label="تبديل الوضع">🌙</button>
+  <button id="langBtn" aria-pressed="false" aria-label="تبديل اللغة">AR</button>
 </div>
 
 <section class="hero">
   <div>
-    <h2 id="typewriter"></h2>
+    <h2 id="typewriter" aria-live="polite"></h2>
     <p id="hero-text">تصميم ديناميكي، واجهات تفاعلية، ووسائط غنية تعطي المستخدم تجربة غامرة.</p>
     <div style="margin-top:20px">
       <button class="button btn-main">اطلب خدمة</button>
@@ -242,12 +224,12 @@
 
 <section id="contact" class="section">
   <h3 id="contact-title">طلب خدمة</h3>
-  <form class="card" style="display:grid;gap:10px">
-    <input type="text" placeholder="الاسم">
-    <input type="email" placeholder="البريد الإلكتروني">
-    <input type="tel" placeholder="رقم الهاتف">
-    <textarea placeholder="وصف الطلب"></textarea>
-    <button class="button btn-main">إرسال</button>
+  <form id="contactForm" class="card" style="display:grid;gap:10px" novalidate>
+    <input id="name" type="text" placeholder="الاسم" required aria-label="الاسم">
+    <input id="email" type="email" placeholder="البريد الإلكتروني" required aria-label="البريد الإلكتروني">
+    <input id="phone" type="tel" placeholder="رقم الهاتف" aria-label="رقم الهاتف">
+    <textarea id="details" placeholder="وصف الطلب" aria-label="وصف الطلب"></textarea>
+    <button type="submit" class="button btn-main">إرسال</button>
   </form>
 </section>
 
@@ -257,30 +239,13 @@
 </footer>
   <!------------------------JS----------------------------------->
 <script>
-  const text = ' "NextEra Digital" — تجربة رقمية مستقبلية';
-  let i=0;
-  function typeWriter(){
-    if(i<text.length){
-      document.getElementById("typewriter").innerHTML+=text.charAt(i);
-      i++;
-      setTimeout(typeWriter,80);
-    }
-  }
-  window.onload = typeWriter;
-
-  let isNight=true;
-  document.getElementById('themeBtn').onclick = function(){
-    document.body.setAttribute('data-theme', isNight?'day':'');
-    isNight = !isNight;
-  }
-
-  let currentLang='ar';
-  document.getElementById('langBtn').onclick = function(){
-    currentLang = currentLang==='ar'?'en':'ar';
+  (function(){
+    // localized texts (including typewriter) - keep minimal and explicit
     const langData = {
       ar: {
         "company-name":"NextEra Digital",
         "slogan":"تخيل. ابتكر. نفذ.",
+        "typewriter":"\"NextEra Digital\" — تجربة رقمية مستقبلية",
         "hero-text":"تصميم ديناميكي، واجهات تفاعلية، ووسائط غنية تعطي المستخدم تجربة غامرة.",
         "about-title":"من نحن",
         "about-text":"نحن فريق شغوف بابتكار حلول رقمية مستقبلية تجمع بين التصميم، التطوير، والذكاء الاصطناعي.",
@@ -291,11 +256,13 @@
         "service4":"تحليلات وذكاء اصطناعي — $800",
         "pricing-title":"الأسعار",
         "content-title":"المحتوى",
-        "contact-title":"طلب خدمة"
+        "contact-title":"طلب خدمة",
+        "langBtn":"AR"
       },
       en: {
         "company-name":"NextEra Digital",
         "slogan":"Imagine. Innovate. Execute.",
+        "typewriter":"\"NextEra Digital\" — a futuristic digital experience",
         "hero-text":"Dynamic design, interactive interfaces, and rich media providing immersive experience.",
         "about-title":"About Us",
         "about-text":"We are a passionate team creating futuristic digital solutions combining design, development, and AI.",
@@ -306,23 +273,119 @@
         "service4":"Analytics & AI — $800",
         "pricing-title":"Pricing",
         "content-title":"Content",
-        "contact-title":"Service Request"
+        "contact-title":"Service Request",
+        "langBtn":"EN"
       }
     };
-    document.getElementById('company-name').textContent = langData[currentLang]["company-name"];
-    document.getElementById('slogan').textContent = langData[currentLang]["slogan"];
-    document.getElementById('hero-text').textContent = langData[currentLang]["hero-text"];
-    document.getElementById('about-title').textContent = langData[currentLang]["about-title"];
-    document.getElementById('about-text').textContent = langData[currentLang]["about-text"];
-    document.getElementById('services-title').textContent = langData[currentLang]["services-title"];
-    document.getElementById('service1').textContent = langData[currentLang]["service1"];
-    document.getElementById('service2').textContent = langData[currentLang]["service2"];
-    document.getElementById('service3').textContent = langData[currentLang]["service3"];
-    document.getElementById('service4').textContent = langData[currentLang]["service4"];
-    document.getElementById('pricing-title').textContent = langData[currentLang]["pricing-title"];
-    document.getElementById('content-title').textContent = langData[currentLang]["content-title"];
-    document.getElementById('contact-title').textContent = langData[currentLang]["contact-title"];
-  }
+
+    // Elements
+    const themeBtn = document.getElementById('themeBtn');
+    const langBtn = document.getElementById('langBtn');
+    const typeEl = document.getElementById('typewriter');
+
+    // State from localStorage or defaults
+    let currentLang = localStorage.getItem('nxd-lang') || 'ar';
+    let currentTheme = localStorage.getItem('nxd-theme') || 'dark'; // dark or day
+
+    function applyTheme(theme){
+      if(theme === 'day'){
+        document.body.setAttribute('data-theme','day');
+        themeBtn.textContent = '☀️';
+        themeBtn.setAttribute('aria-pressed','true');
+      } else {
+        document.body.removeAttribute('data-theme');
+        themeBtn.textContent = '🌙';
+        themeBtn.setAttribute('aria-pressed','false');
+      }
+      localStorage.setItem('nxd-theme', theme);
+    }
+
+    function applyLang(lang){
+      const data = langData[lang] || langData.ar;
+      document.getElementById('company-name').textContent = data['company-name'];
+      document.getElementById('slogan').textContent = data['slogan'];
+      document.getElementById('hero-text').textContent = data['hero-text'];
+      document.getElementById('about-title').textContent = data['about-title'];
+      document.getElementById('about-text').textContent = data['about-text'];
+      document.getElementById('services-title').textContent = data['services-title'];
+      document.getElementById('service1').textContent = data['service1'];
+      document.getElementById('service2').textContent = data['service2'];
+      document.getElementById('service3').textContent = data['service3'];
+      document.getElementById('service4').textContent = data['service4'];
+      document.getElementById('pricing-title').textContent = data['pricing-title'];
+      document.getElementById('content-title').textContent = data['content-title'];
+      document.getElementById('contact-title').textContent = data['contact-title'];
+      langBtn.textContent = data['langBtn'] || lang.toUpperCase();
+      // set document direction and html lang
+      document.documentElement.lang = (lang === 'en' ? 'en' : 'ar');
+      document.documentElement.dir = (lang === 'en' ? 'ltr' : 'rtl');
+      localStorage.setItem('nxd-lang', lang);
+      // restart typewriter with localized text
+      startTypewriter(data['typewriter']);
+    }
+
+    // Typewriter (clears then types)
+    let twTimer = null;
+    function startTypewriter(text){
+      clearTimeout(twTimer);
+      typeEl.textContent = '';
+      let idx = 0;
+      (function step(){
+        if(idx < text.length){
+          typeEl.textContent += text.charAt(idx);
+          idx++;
+          twTimer = setTimeout(step, 60);
+        }
+      })();
+    }
+
+    // Toggle handlers
+    themeBtn.addEventListener('click', function(){
+      currentTheme = (localStorage.getItem('nxd-theme') === 'day') ? 'dark' : 'day';
+      applyTheme(currentTheme === 'day' ? 'day' : 'dark');
+    });
+
+    langBtn.addEventListener('click', function(){
+      currentLang = (localStorage.getItem('nxd-lang') === 'ar') ? 'en' : 'ar';
+      applyLang(currentLang);
+    });
+
+    // Contact form basic validation and toast
+    const form = document.getElementById('contactForm');
+    const toast = document.createElement('div');
+    toast.className = 'toast';
+    document.body.appendChild(toast);
+
+    function showToast(msg){
+      toast.textContent = msg;
+      toast.style.display = 'block';
+      setTimeout(()=>{ toast.style.display = 'none'; }, 3500);
+    }
+
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      if(!name){ showToast(currentLang === 'ar' ? 'الرجاء إدخال الاسم' : 'Please enter your name'); return; }
+      if(!email){ showToast(currentLang === 'ar' ? 'الرجاء إدخال البريد الإلكتروني' : 'Please enter an email'); return; }
+      // Simulate success
+      showToast(currentLang === 'ar' ? 'تم إرسال طلبك. سنعاود الاتصال قريباً.' : 'Your request has been sent. We will contact you soon.');
+      form.reset();
+    });
+
+    // Initialize on DOM ready
+    document.addEventListener('DOMContentLoaded', function(){
+      applyTheme(localStorage.getItem('nxd-theme') === 'day' ? 'day' : 'dark');
+      applyLang(localStorage.getItem('nxd-lang') || currentLang);
+      // Smoothly handle same-page anchors for RTL/LTR changes
+      document.querySelectorAll('a[href^="#"]').forEach(a=>{
+        a.addEventListener('click', e=>{
+          // allow default smooth scroll; close mobile menus if present in future
+        });
+      });
+    });
+
+  })();
 </script>
 </body>
 </html>
