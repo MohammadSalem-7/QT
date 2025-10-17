@@ -273,8 +273,8 @@
       </div>
     </div>
 
-    <img src="https://d.top4top.io/p_3518r34uj1.png"
-         alt="Kali Linux Logo" class="kali-logo">
+    <img id="kaliLogo" src="https://d.top4top.io/p_3518r34uj1.png"
+      alt="Kali Linux Logo" class="kali-logo" role="button" tabindex="0" aria-pressed="false" aria-label="تشغيل تأثير الماتريكس">
   </div>
 
   <script>
@@ -307,6 +307,105 @@
     function toggleInfo() {
       document.getElementById('more-info').classList.toggle('active');
     }
+  </script>
+  <style>
+    /* Matrix overlay styles */
+    #matrixOverlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.85);
+      display: none;
+      z-index: 3000;
+      align-items: center;
+      justify-content: center;
+    }
+    #matrixCanvas { width:100%; height:100%; display:block; }
+    /* small status hint */
+    .matrix-hint {
+      position: fixed; left: 12px; bottom: 12px; z-index:3100; color:#0f0; font-family: monospace; font-size:12px; background:rgba(0,0,0,0.5); padding:8px 10px; border-radius:6px; border:1px solid rgba(0,255,0,0.08);
+    }
+  </style>
+
+  <div id="matrixOverlay" aria-hidden="true">
+    <canvas id="matrixCanvas"></canvas>
+    <div class="matrix-hint">Matrix mode —| سيختفي بعد 12 ثانية</div>
+  </div>
+
+  <script>
+    // Matrix rain effect (simple canvas implementation)
+    (function(){
+      const kali = document.getElementById('kaliLogo');
+      const overlay = document.getElementById('matrixOverlay');
+      const canvas = document.getElementById('matrixCanvas');
+      const ctx = canvas.getContext && canvas.getContext('2d');
+      let animId = null; let stopTimeout = null;
+
+      function resize(){
+        canvas.width = window.innerWidth * devicePixelRatio;
+        canvas.height = window.innerHeight * devicePixelRatio;
+        canvas.style.width = window.innerWidth + 'px';
+        canvas.style.height = window.innerHeight + 'px';
+        if(ctx) ctx.setTransform(devicePixelRatio,0,0,devicePixelRatio,0,0);
+      }
+
+  // use Latin letters + digits + symbols for the Matrix rain
+  const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%&*';
+
+      function startMatrix(){
+        if(!ctx) return;
+        overlay.style.display = 'flex';
+        overlay.setAttribute('aria-hidden','false');
+        kali.setAttribute('aria-pressed','true');
+        resize();
+
+        const fontSize = Math.max(12, Math.round(Math.min(window.innerWidth, window.innerHeight) / 50));
+        const columns = Math.floor(window.innerWidth / fontSize);
+        const drops = new Array(columns).fill(1);
+
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+        ctx.font = fontSize + 'px monospace';
+
+        function draw(){
+          ctx.fillStyle = 'rgba(0, 0, 0, 0.08)';
+          ctx.fillRect(0,0,canvas.width,canvas.height);
+
+          ctx.fillStyle = '#00ff66';
+          for(let i=0;i<drops.length;i++){
+            const text = letters.charAt(Math.floor(Math.random()*letters.length));
+            const x = i * fontSize;
+            const y = drops[i] * fontSize;
+            ctx.fillText(text, x, y);
+            if(y > window.innerHeight && Math.random() > 0.975) drops[i] = 0;
+            drops[i]++;
+          }
+          animId = requestAnimationFrame(draw);
+        }
+        draw();
+
+        // auto-stop after 12s
+        stopTimeout = setTimeout(stopMatrix, 12000);
+      }
+
+      function stopMatrix(){
+        if(animId) cancelAnimationFrame(animId);
+        animId = null;
+        if(stopTimeout){ clearTimeout(stopTimeout); stopTimeout = null; }
+        overlay.style.display = 'none';
+        overlay.setAttribute('aria-hidden','true');
+        kali.setAttribute('aria-pressed','false');
+        if(ctx) ctx.clearRect(0,0,canvas.width,canvas.height);
+      }
+
+      // toggle handler (click or keyboard)
+      function toggle(e){
+        if(e.type === 'keydown' && !(/Enter|\s/.test(e.key))) return;
+        if(overlay.style.display === 'flex') stopMatrix(); else startMatrix();
+      }
+
+      kali.addEventListener('click', toggle);
+      kali.addEventListener('keydown', toggle);
+      window.addEventListener('resize', ()=>{ if(overlay.style.display === 'flex') resize(); });
+    })();
   </script>
 </body>
 </html>
